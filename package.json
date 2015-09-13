@@ -1,0 +1,28 @@
+{
+  "name": "qbedict",
+  "version": "1.0.0",
+  "description": "",
+  "main": "convert.js",
+  "dependencies": {
+    "gulp": "^3.8.11",
+    "gulp-util": "^3.0.4",
+    "run-sequence": "^1.0.2"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-concat-json": "^1.0.0",
+    "gulp-convert-encoding": "0.0.3",
+    "gulp-remote-src": "^0.4.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-util": "^3.0.4",
+    "request": "^2.61.0",
+    "run-sequence": "^1.0.2",
+    "string": "^3.3.1",
+    "vinyl-map": "^1.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
