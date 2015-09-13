@@ -46,10 +46,10 @@ Instructions are provided only for Windows 8.1. Procedure for building on other 
    
     git checkout 
    
-3. 
+3. TODO ...
 
 License
 -------
-Project is licensed under GNU GPLv2.0. See file LICENSE.md for more information.
+Project is licensed under GNU GPLv2.0. See file LICENSE for more information.
 
 
