@@ -1,0 +1,54 @@
+#list ul {
+    height: 100%;
+}
+
+li.intro {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+    padding-top: 2em;
+    border-bottom: none !important;
+}
+
+.details p {
+    font-size: 1.1em;
+}
+
+p.caption span {
+    font-weight: bold;
+}
+
+span.definition {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+span.first-line {
+    font-size: 1.1em;
+}
+
+.meaning br {
+    line-height: 1.8em;
+}
+
+header input,
+header input[type="text"] {
+    font-size: 1.2em;
+}
+
+header input[type="text"] {
+    text-indent: 32px !important;
+    background: url("../images/input-bg.png") 10px center no-repeat !important;
+}
+
+header input::-webkit-input-placeholder,
+header input:-moz-placeholder,
+header input::-moz-placeholder,
+header input:-ms-input-placeholder,
+header input::placeholder {
+    text-indent: 32px !important;
+}

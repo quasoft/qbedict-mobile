@@ -1,48 +1,17 @@
-/*
- * Please see the included README.md file for license terms and conditions.
- */
-
-
-// This file is a suggested starting place for your code.
-// It is completely optional and not required.
-// Note the reference that includes it in the index.html file.
-
-
-/*jslint browser:true, devel:true, white:true, vars:true */
-/*global $:false, intel:false app:false, dev:false, cordova:false */
-
-
-// For improved debugging and maintenance of your app, it is highly
-// recommended that you separate your JavaScript from your HTML files.
-// Use the addEventListener() method to associate events with DOM elements.
-
-// For example:
-
-// var el ;
-// el = document.getElementById("id_myButton") ;
-// el.addEventListener("click", myEventHandler, false) ;
-
-
-
-// The function below is an example of the best way to "start" your app.
-// This example is calling the standard Cordova "hide splashscreen" function.
-// You can add other code to it or add additional functions that are triggered
-// by the same event or other events.
-
 function onAppReady() {
+    /*
     if( navigator.splashscreen && navigator.splashscreen.hide ) {   // Cordova API detected
         navigator.splashscreen.hide() ;
     }
+    */
 }
-// document.addEventListener("app.Ready", onAppReady, false) ;
 document.addEventListener("deviceready", onAppReady, false) ;
-// document.addEventListener("onload", onAppReady, false) ;
 
-var MAX_ITEMS = 10;
+var MAX_ITEMS = 15;
 var data = [];
 var dataURL = "";
-var search = "";
 var baseURL = "";
+var lang = "";
 
 function getWebRoot() {
     "use strict";
@@ -60,8 +29,36 @@ function escapeHtml(unsafe) {
         .replace(/'/g, "&#039;");
 }
 
+function sanitizeWord(str) {
+    return str.replace(/[^a-zA-Zа-яА-Я]/gi, '');
+}
+
+function highlightMeaning(str, dict) {
+    var tag = 'b';
+    if (dict == "en-bg")
+        return str.replace(/([a-zA-Z '/-]{3,})/gi, '<em><b>$1</b></em>');
+    else
+        return str.replace(/([а-яА-Я '/-]{3,})/gi, '<em><b>$1</b></em>');
+}
+
 function initApp() {
     baseURL = getWebRoot();
+}
+
+function getDict(input) {
+    if (!input) {
+        return;
+    }
+    var char = S(input).left(1).toLowerCase();
+
+    var dict = "";
+    if (char.match(/[a-zA-z]/i)) {
+        dict = "en-bg";
+    }
+    else if (char.match(/[а-яА-Я]/i)) {
+        dict = "bg-en";
+    }
+    return dict;
 }
 
 function getLetterURL(input) {
@@ -70,18 +67,17 @@ function getLetterURL(input) {
     }
     var char = S(input).left(1).toLowerCase();
 
-    var dict = "";
-    var offset = 0;
-    if (char.match(/[a-zA-z]/i)) {
-        dict = "en-bg";
-        offset = 96;
-    }
-    else if (char.match(/[а-яА-Я]/i)) {
-        dict = "bg-en";
-        offset = 1071;
-    }
+    var dict = getDict(input);
     if (!dict) {
         return;
+    }
+    
+    var offset = 0;
+    if (dict == "en-bg") {
+        offset = 96;
+    }
+    else if (dict == "bg-en") {
+        offset = 1071;
     }
     var dictURL = baseURL + "/data/" + dict;
 
@@ -105,27 +101,38 @@ function findItem(input) {
 function loadList(index) {
     var $list = $("#word-list");
     var $pages = $("#pages");
+    var input = $("#word-search").val();
+    var dict = getDict(input);
     
     if (index < 0) {
-        // TODO: clear list
-        // TODO: show some message
         return;
     }
     
     var num = 0;
     for (var i = index; i < index + MAX_ITEMS; i++)
     {
-        var word = data[i].w;
-        var transcript = data[i].t || "-";
-        var meaning = S(escapeHtml(data[i].m)).replaceAll("\r\n", "<br><br>");
-        
         num++;
-        $list.append('<li><a href="#item' + num + '">' + escapeHtml(word) + '</a></li>');
+        
+        var word = data[i].w;
+        var transcript = (data[i].t)
+            ? '<hr><p class="caption transcript"><span>Pronunciation: </span>' +
+              escapeHtml(data[i].t) +
+              '</p>'
+            : '';
+        var firstLine = (data[i].m) ? S(data[i].m).split('\r\n', 1)[0] : "";
+        var meaning = escapeHtml(data[i].m);
+        var body = highlightMeaning(meaning, dict);
+        body = S(body).replaceAll("\r\n", "<br>");
+        var wordID = sanitizeWord(word) + "-" + num + "-" + Math.floor(Math.random() * 65534) + 1;
+        
+        $list.append('<li><a href="#' + wordID + '"><span class="definition">' + escapeHtml(word) + '</span><br><span class="first-meaning">' + escapeHtml(firstLine) + '</span></a></li>');
         
         $pages.append(
-        '<div class="panel details" data-title="' + escapeHtml(word) + '" id="item' + num + '" data-footer="none">' +
-        '    <p class="transcript"><span>Transcript: </span>' + transcript + '</p>' +
-        '    <p class="meaning"><span>Meaning:<br></span>' + meaning + '</p>' +
+        '<div class="panel details" data-title="' + escapeHtml(word) + '" id="' + wordID + '" data-footer="none">' +
+        '    <p class="caption word"><span>Word: </span>' + escapeHtml(word) + '</p>' +
+        transcript +
+        '    <hr> ' +
+        '    <p class="caption meaning"><span>Meaning:<br></span>' + body + '</p>' +
         '</div>'
         );
     }
@@ -171,7 +178,9 @@ function loadData(url) {
         data = json;
         dataURL = url;
         
-        loadWords(search);
+        var input = $("#word-search").val();
+        
+        loadWords(input);
     });
 }
 
@@ -193,12 +202,6 @@ function inputChanged() {
     if (checkLoadData(letterURL)) {
         loadWords(input);
     }
-    else {
-        search = input;
-    }
-    
-    // filter words
-    // show 10 words
 }
 
 // The app.Ready event shown above is generated by the init-dev.js file; it

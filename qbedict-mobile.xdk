@@ -5,7 +5,7 @@
       "projectTypeName": "com.intel.xdk.projecttype.webapp",
       "src": "https://appcenter.html5tools-software.intel.com/api/v2.0/redirect/projectrenderers/release-2015-ww32/webapp/templates-list-view/sample.zip",
       "projectGuid": "7cc6f003-6aa8-445e-ad62-5d5134a96110",
-      "lastModifiedDate": 1442042933656,
+      "lastModifiedDate": 1442144595116,
       "creationDate": 1442042933354
     },
     "sourceDirectory": "www",
@@ -27,23 +27,49 @@
           "android-installLocation": "auto"
         },
         "isActive_": true,
-        "appName_": "qbedict-mobile",
-        "appID_": "not.yet.specified",
+        "appName_": "QBE Dictionary",
+        "appID_": "quasoft.qbedict.mobile",
         "appAccess_": [
           {
             "origin": "*"
           }
         ],
-        "icons_": [],
+        "icons_": [
+          {
+            "relPath": "icons/Icon-ldpi.png",
+            "density": "ldpi",
+            "height": 36,
+            "width": 36
+          },
+          {
+            "relPath": "icons/Icon-mdpi.png",
+            "density": "mdpi",
+            "height": 48,
+            "width": 48
+          },
+          {
+            "relPath": "icons/Icon-hdpi.png",
+            "density": "hdpi",
+            "height": 72,
+            "width": 72
+          },
+          {
+            "relPath": "icons/Icon-xhdpi.png",
+            "density": "xhdpi",
+            "height": 96,
+            "width": 96
+          }
+        ],
         "splashes_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
         "iosProvs_": [],
         "cordovaCLIVersion_": "4.1.2",
-        "appVersion_": "0.0.1",
-        "appVersionCode_": "1",
+        "appVersion_": "1.0.1",
+        "appVersionCode_": "2",
         "crosswalkVersion_": "11",
-        "appAuthor_": "Intel XDK"
+        "appAuthor_": "QuaSoft",
+        "appDescription_": "Bulgarian English Dictionary"
       },
       "Android-Crosswalk": {
         "platform_": "android",
@@ -55,23 +81,49 @@
           "android-installLocation": "auto"
         },
         "isActive_": true,
-        "appName_": "qbedict-mobile",
-        "appID_": "not.yet.specified",
+        "appName_": "QBE Dictionary",
+        "appID_": "quasoft.qbedict.mobile",
         "appAccess_": [
           {
             "origin": "*"
           }
         ],
-        "icons_": [],
+        "icons_": [
+          {
+            "relPath": "icons/Icon-ldpi.png",
+            "density": "ldpi",
+            "height": 36,
+            "width": 36
+          },
+          {
+            "relPath": "icons/Icon-mdpi.png",
+            "density": "mdpi",
+            "height": 48,
+            "width": 48
+          },
+          {
+            "relPath": "icons/Icon-hdpi.png",
+            "density": "hdpi",
+            "height": 72,
+            "width": 72
+          },
+          {
+            "relPath": "icons/Icon-xhdpi.png",
+            "density": "xhdpi",
+            "height": 96,
+            "width": 96
+          }
+        ],
         "splashes_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
         "iosProvs_": [],
         "cordovaCLIVersion_": "4.1.2",
-        "appVersion_": "0.0.1",
-        "appVersionCode_": "1",
+        "appVersion_": "1.0.1",
+        "appVersionCode_": "2",
         "crosswalkVersion_": "11",
-        "appAuthor_": "Intel XDK"
+        "appAuthor_": "QuaSoft",
+        "appDescription_": "Bulgarian English Dictionary"
       },
       "iOS": {
         "platform_": "ios",
@@ -82,21 +134,48 @@
           "ios-configuration": "adhoc"
         },
         "isActive_": true,
-        "appName_": "qbedict-mobile",
-        "appID_": "not.yet.specified",
+        "appName_": "QBE Dictionary",
+        "appID_": "quasoft.qbedict.mobile",
         "appAccess_": [
           {
             "origin": "*"
           }
         ],
-        "icons_": [],
+        "icons_": [
+          {
+            "relPath": "icons/Icon-120.png",
+            "height": 120,
+            "width": 120
+          },
+          {
+            "relPath": "icons/Icon-60.png",
+            "height": 60,
+            "width": 60
+          },
+          {
+            "relPath": "icons/Icon-60@3x.png",
+            "height": 180,
+            "width": 180
+          },
+          {
+            "relPath": "icons/Icon-152.png",
+            "height": 152,
+            "width": 152
+          },
+          {
+            "relPath": "icons/Icon-76.png",
+            "height": 76,
+            "width": 76
+          }
+        ],
         "splashes_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
         "iosProvs_": [],
         "cordovaCLIVersion_": "4.1.2",
-        "appVersion_": "0.0.1",
-        "appAuthor_": "Intel XDK"
+        "appVersion_": "1.0.1",
+        "appAuthor_": "QuaSoft",
+        "appDescription_": "Bulgarian English Dictionary"
       },
       "Windows8": {
         "platform_": "windows8",
@@ -104,8 +183,8 @@
         "name_": "Windows8",
         "preferences_": {},
         "isActive_": true,
-        "appName_": "qbedict-mobile",
-        "appID_": "not.yet.specified",
+        "appName_": "QBE Dictionary",
+        "appID_": "quasoft.qbedict.mobile",
         "appAccess_": [
           {
             "origin": "*"
@@ -117,8 +196,9 @@
         "excludedLibraries_": "",
         "iosProvs_": [],
         "cordovaCLIVersion_": "4.1.2",
-        "appVersion_": "0.0.1",
-        "appAuthor_": "Intel XDK"
+        "appVersion_": "1.0.1",
+        "appAuthor_": "QuaSoft",
+        "appDescription_": "Bulgarian English Dictionary"
       },
       "WebApp": {
         "platform_": "webapp",

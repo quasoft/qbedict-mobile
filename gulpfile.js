@@ -75,7 +75,20 @@ gulp.task('convert-data', function () {
       else {
         if (isFirst && string(line).startsWith("[")) {
           // transcript
-          item["t"] = line;
+		  var tr = string(line)
+			.replaceAll('§','ʌ')
+			.replaceAll('a:','ɑ:')
+			.replaceAll('Ў','æ')
+			.replaceAll('ў','ə')
+			.replaceAll('¦','ʃ')
+			.replaceAll('Ґ','θ')
+			.replaceAll('¤','ŋ')
+			.replaceAll('­','ð')
+			.replaceAll('Ј','ɔ')
+			.replaceAll('©','ʒ')
+			.replaceAll('u','ʊ')
+			.replaceAll('Ё','e').s;
+		  item["t"] = tr;
           continue;
         }
 

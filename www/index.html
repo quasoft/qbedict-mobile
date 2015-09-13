@@ -12,6 +12,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="stylesheet" type="text/css" href="appframework/build/icons.css" />
     <link rel="stylesheet" type="text/css" href="appframework/build/af.ui.css" />
+    <link rel="stylesheet" type="text/css" href="style/style.css" />
 
 
     <script type="text/javascript" charset="utf-8" src="lib/jquery.min.js"></script>
@@ -20,37 +21,27 @@
     <script type="text/javascript" charset="utf-8" src="appframework/build/appframework.ui.js"></script>
     <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
 
-    <script src="lib/target-script-min.js"></script>
+    <!--<script src="lib/target-script-min.js"></script>-->
 </head>
 
 <body>
-
-    <div id="splashscreen" class='ui-loader heavy'>
-        QBE Dictionary Mobile
-        <br>
-        <br>
-        <span class='ui-icon ui-icon-loading spin'></span>
-        <h1>Loading...</h1>
-    </div>
-
     <div class="view" id="mainview">
         <header>
-            <input id="word-search" class="wide-control" placeholder="Въведете дума / Enter word" type="text">
+            <input id="word-search" class="wide-control" placeholder="Въведете дума / Enter word" type="text" data-clear-btn="true">
         </header>
 
         <div class="pages" id="pages">
 
-             <!--Initial List of items-->
+            <!--Initial List of items-->
             <div class="panel" data-title="List" id="list" data-selected="true">
               <ul class="list" id="word-list">
+                  <li class="intro">
+                      <h3>QBE Bulgarian-English Dictionary</h3>
+                      <br><img src="icons/Icon-64.png">
+                  </li>
               </ul>
             </div>
         </div>
-
-         <!--Footer to add tabs if desired-->
-        <footer>
-            <a href="#main" class="" id='tab1' ></a>
-        </footer>
     </div>
 
     <script>
