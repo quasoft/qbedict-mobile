@@ -3,7 +3,7 @@ QBE Dictionary for Mobile Devices
 
 About
 -----
-`QBE Dictionary` is a cross-platform Bulgarian-English dictionary built on Intel XDK platform.
+`QBE Dictionary` is a cross-platform Bulgarian-English dictionary built on Intel(R) XDK platform.
 
 The project uses data in format, that is compatible with dictionaries of [bgoffice project](http://bgoffice.sourceforge.net), and has been tested to work with ["en-bg"](http://sourceforge.net/p/bgoffice/code/HEAD/tree/trunk/dictionaries/data/en-bg/) and ["bg-en"](http://sourceforge.net/p/bgoffice/code/HEAD/tree/trunk/dictionaries/data/bg-en/) dictionaries.
 
@@ -12,13 +12,13 @@ Dictionary data is not redistributed, as the authors of bgoffice project do not 
 How to build?
 -------------
 
-Note that, when using Intel XDK, the actual build process is not done on your development PC, but in the cloud. The steps described below just prepare you for the build process.
+Note that, when using Intel(R) XDK, the actual build process is not done on your development PC, but in the cloud. The steps described below just prepare you for the build process.
 
 Instructions are provided only for Windows 8.1. Procedure for building on other platforms is similar.
 
 ### Requirements
 
-* Intel XDK version 2366 or newer
+* Intel(R) XDK version 2366 or newer
 * git
 * node.js
     * request
