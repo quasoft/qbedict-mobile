@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--HTML5 doctype-->
+<html>
+
+<head>
+
+    <title>List View Template</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="stylesheet" type="text/css" href="appframework/build/icons.css" />
+    <link rel="stylesheet" type="text/css" href="appframework/build/af.ui.css" />
+
+
+    <script type="text/javascript" charset="utf-8" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="lib/fastclick.min.js"></script>
+    <script type="text/javascript" src="lib/string.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="appframework/build/appframework.ui.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+    <script src="lib/target-script-min.js"></script>
+</head>
+
+<body>
+
+    <div id="splashscreen" class='ui-loader heavy'>
+        QBE Dictionary Mobile
+        <br>
+        <br>
+        <span class='ui-icon ui-icon-loading spin'></span>
+        <h1>Loading...</h1>
+    </div>
+
+    <div class="view" id="mainview">
+        <header>
+            <input id="word-search" class="wide-control" placeholder="Въведете дума / Enter word" type="text">
+        </header>
+
+        <div class="pages" id="pages">
+
+             <!--Initial List of items-->
+            <div class="panel" data-title="List" id="list" data-selected="true">
+              <ul class="list" id="word-list">
+              </ul>
+            </div>
+        </div>
+
+         <!--Footer to add tabs if desired-->
+        <footer>
+            <a href="#main" class="" id='tab1' ></a>
+        </footer>
+    </div>
+
+    <script>
+        initApp();
+        
+        $("#word-search").bind("input propertychange", function (evt) {
+            if (window.event && event.type == "propertychange" && event.propertyName != "value")
+                return;
+
+            window.clearTimeout($(this).data("timeout"));
+            $(this).data("timeout", setTimeout(function () {
+                inputChanged();
+            }, 1000));
+        });
+    </script>
+</body>
+
+</html>

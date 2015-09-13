@@ -1,0 +1,213 @@
+/*
+ * Please see the included README.md file for license terms and conditions.
+ */
+
+
+// This file is a suggested starting place for your code.
+// It is completely optional and not required.
+// Note the reference that includes it in the index.html file.
+
+
+/*jslint browser:true, devel:true, white:true, vars:true */
+/*global $:false, intel:false app:false, dev:false, cordova:false */
+
+
+// For improved debugging and maintenance of your app, it is highly
+// recommended that you separate your JavaScript from your HTML files.
+// Use the addEventListener() method to associate events with DOM elements.
+
+// For example:
+
+// var el ;
+// el = document.getElementById("id_myButton") ;
+// el.addEventListener("click", myEventHandler, false) ;
+
+
+
+// The function below is an example of the best way to "start" your app.
+// This example is calling the standard Cordova "hide splashscreen" function.
+// You can add other code to it or add additional functions that are triggered
+// by the same event or other events.
+
+function onAppReady() {
+    if( navigator.splashscreen && navigator.splashscreen.hide ) {   // Cordova API detected
+        navigator.splashscreen.hide() ;
+    }
+}
+// document.addEventListener("app.Ready", onAppReady, false) ;
+document.addEventListener("deviceready", onAppReady, false) ;
+// document.addEventListener("onload", onAppReady, false) ;
+
+var MAX_ITEMS = 10;
+var data = [];
+var dataURL = "";
+var search = "";
+var baseURL = "";
+
+function getWebRoot() {
+    "use strict";
+    var path = window.location.href;
+    path = path.substring( 0, path.lastIndexOf('/') );
+    return path;
+}
+
+function escapeHtml(unsafe) {
+    return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function initApp() {
+    baseURL = getWebRoot();
+}
+
+function getLetterURL(input) {
+    if (!input) {
+        return;
+    }
+    var char = S(input).left(1).toLowerCase();
+
+    var dict = "";
+    var offset = 0;
+    if (char.match(/[a-zA-z]/i)) {
+        dict = "en-bg";
+        offset = 96;
+    }
+    else if (char.match(/[а-яА-Я]/i)) {
+        dict = "bg-en";
+        offset = 1071;
+    }
+    if (!dict) {
+        return;
+    }
+    var dictURL = baseURL + "/data/" + dict;
+
+    var code = char.charCodeAt(0);
+    var order = code - offset;
+    var letterURL = dictURL + "/d" + S(order).padLeft(2, "0") + ".json";
+    return letterURL;
+}
+
+function findItem(input) {
+    var index = -1;
+    for (var i = 0; i < data.length; i++) {
+        if (data[i].w && (S(data[i].w).startsWith(input))) {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+function loadList(index) {
+    var $list = $("#word-list");
+    var $pages = $("#pages");
+    
+    if (index < 0) {
+        // TODO: clear list
+        // TODO: show some message
+        return;
+    }
+    
+    var num = 0;
+    for (var i = index; i < index + MAX_ITEMS; i++)
+    {
+        var word = data[i].w;
+        var transcript = data[i].t || "-";
+        var meaning = S(escapeHtml(data[i].m)).replaceAll("\r\n", "<br><br>");
+        
+        num++;
+        $list.append('<li><a href="#item' + num + '">' + escapeHtml(word) + '</a></li>');
+        
+        $pages.append(
+        '<div class="panel details" data-title="' + escapeHtml(word) + '" id="item' + num + '" data-footer="none">' +
+        '    <p class="transcript"><span>Transcript: </span>' + transcript + '</p>' +
+        '    <p class="meaning"><span>Meaning:<br></span>' + meaning + '</p>' +
+        '</div>'
+        );
+    }
+}
+
+function clearWords() {
+    $("#word-list").empty();
+    $(".pages .details").empty();
+}
+
+function loadWords(input) {
+    if (!input) {
+        return;
+    }
+    
+    if ((!data) || (data.length === 0)) {
+        return;
+    }
+    
+    var index = -1;
+    var count = 0;
+    do {
+        index = findItem(input);
+        if (index < 0) {
+            if (input.length > 0)
+                input = S(input).left(input.length - 1);
+            else
+                input = "";
+        }
+        
+        count++;
+    } while ((index < 0) && (input !== "") && (count < 10));
+    
+    if (count >= 10) {
+        index = -1;
+    }
+    
+    loadList(index);
+}
+
+function loadData(url) {
+    $.getJSON(url, function(json) {
+        data = json;
+        dataURL = url;
+        
+        loadWords(search);
+    });
+}
+
+function checkLoadData(url) {
+    if (dataURL != url) {
+        loadData(url);
+        return false;
+    }
+    
+    return true;
+}
+
+function inputChanged() {
+    var input = $("#word-search").val();
+    var letterURL = getLetterURL(input);
+    
+    clearWords();
+
+    if (checkLoadData(letterURL)) {
+        loadWords(input);
+    }
+    else {
+        search = input;
+    }
+    
+    // filter words
+    // show 10 words
+}
+
+// The app.Ready event shown above is generated by the init-dev.js file; it
+// unifies a variety of common "ready" events. See the init-dev.js file for
+// more details. You can use a different event to start your app, instead of
+// this event. A few examples are shown in the sample code above. If you are
+// using Cordova plugins you need to either use this app.Ready event or the
+// standard Crordova deviceready event. Others will either not work or will
+// work poorly.
+
+// NOTE: change "dev.LOG" in "init-dev.js" to "true" to enable some console.log
+// messages that can help you debug Cordova app initialization issues.
