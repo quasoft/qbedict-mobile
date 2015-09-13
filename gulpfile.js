@@ -97,7 +97,7 @@ gulp.task('convert-data', function () {
     .pipe(convertEncoding({from: 'win1251', to: encoding}))
     .pipe(textToJSON2)
     .pipe(rename({extname: ".json"}))
-    .pipe(gulp.dest('./qbedict-mobile/www/data/'));
+    .pipe(gulp.dest('./www/data/'));
 });
 
 gulp.task('default', function(callback) {
