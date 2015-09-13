@@ -7,7 +7,7 @@ About
 
 The project uses data in format, that is compatible with dictionaries of [bgoffice project](http://bgoffice.sourceforge.net), and has been tested to work with ["en-bg"](http://sourceforge.net/p/bgoffice/code/HEAD/tree/trunk/dictionaries/data/en-bg/) and ["bg-en"](http://sourceforge.net/p/bgoffice/code/HEAD/tree/trunk/dictionaries/data/bg-en/) dictionaries.
 
-Dictionary data is not redistributed, as the authors of bgoffice project do not state clearly what is the license of this data. Instead, a GULP script is provided that shows how to use such data in compatible format.
+Dictionary data is not redistributed, as the authors of bgoffice project do not state clearly what is the license of this data. Instead, a Gulp script is provided that shows how to use such data in compatible format.
 
 How to build?
 -------------
