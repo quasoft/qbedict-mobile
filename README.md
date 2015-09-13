@@ -21,32 +21,73 @@ Instructions are provided only for Windows 8.1. Procedure for building on other 
 * Intel(R) XDK version 2366 or newer
 * git
 * node.js
-    * request
-    * run-sequence
-    * string
-    * vinyl-map
 * gulp
-    * gulp-concat-json
-    * gulp-convert-encoding
-    * gulp-remote-src
-    * gulp-rename
-    * gulp-util
 * Mobile device for testing application
 	
 ### Build on Windows 8.1
 
-1. Install Intel XDK
+1. Install Intel XDK:
 
    Download Intel XDK version (version 2366 or newer) from [Intel Developer Zone](https://software.intel.com/en-us/intel-xdk) and create a developer account.
   
-2. Get source code from Github
+2. Get source code from Github:
 
    Create empty folder named `qbedict-mobile` and `cd` to that folder from command prompt (console).
-   Execute the following commands:
    
-    git checkout 
+   ```batch
+   d:
+   cd \
+   git clone https://github.com/quasoft/qbedict-mobile.git
+   cd qbedict-mobile
+   node install
+   gulp update-data
+   gulp convert-data
+   ```
+   The following node.js and gulp packages should automatically be installed:
+   * node.js
+       * request
+       * run-sequence
+       * string
+       * vinyl-map
+   * gulp
+       * gulp-concat-json
+       * gulp-convert-encoding
+       * gulp-remote-src
+       * gulp-rename
+       * gulp-util
    
-3. TODO ...
+3. Install node.js and gulp packages:
+
+   ```batch
+   node install
+   ```
+   The following node.js and gulp packages should be installed automatically:
+   * node.js
+       * request
+       * run-sequence
+       * string
+       * vinyl-map
+   * gulp
+       * gulp-concat-json
+       * gulp-convert-encoding
+       * gulp-remote-src
+       * gulp-rename
+       * gulp-util
+
+4. Prepare dictionary data:
+
+   Sample gulp script uses data from bgoffice project. Modify script if you want to use another data source.
+   (Output format of data should be kept the same - see files in data/en-bg folder for samples).
+
+   ```batch
+   gulp update-data
+   gulp convert-data
+   ```
+5. Open project (file qbedict-mobile.xdk) in Intel(R) XDK.
+
+6. Test in Emulator and on real device.
+
+8. Build and upload to platform stores.
 
 License
 -------
