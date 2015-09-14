@@ -39,16 +39,3 @@ header input,
 header input[type="text"] {
     font-size: 1.2em;
 }
-
-header input[type="text"] {
-    text-indent: 32px !important;
-    background: url("../images/input-bg.png") 10px center no-repeat !important;
-}
-
-header input::-webkit-input-placeholder,
-header input:-moz-placeholder,
-header input::-moz-placeholder,
-header input:-ms-input-placeholder,
-header input::placeholder {
-    text-indent: 32px !important;
-}

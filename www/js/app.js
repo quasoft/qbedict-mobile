@@ -10,8 +10,9 @@ document.addEventListener("deviceready", onAppReady, false) ;
 var MAX_ITEMS = 15;
 var data = [];
 var dataURL = "";
+var dataID = 0;
 var baseURL = "";
-var lang = "";
+var search = "";
 
 function getWebRoot() {
     "use strict";
@@ -87,15 +88,35 @@ function getLetterURL(input) {
     return letterURL;
 }
 
-function findItem(input) {
-    var index = -1;
-    for (var i = 0; i < data.length; i++) {
-        if (data[i].w && (S(data[i].w).startsWith(input))) {
-            index = i;
+function quickFindItem(input) {
+    input = S(input).stripPunctuation().toLowerCase();
+    var low = 0;
+    var high = data.length - 1;
+    var middle = -1;
+    var c = 0;    
+    while ((low + 1 < high) && (low < data.length) && (high >= 0)) {
+        middle = Math.floor(((high - low) / 2) + low);
+        var compare = S(data[middle].w).stripPunctuation().toLowerCase();
+        var res = input.localeCompare(compare);
+        if (res > 0) {
+            low = middle;
+        }
+        else if (res < 0) {
+            high = middle;
+        }
+        else {
+            break;
+        }
+        c++;
+        if (c > 100)
+        {
+            console.log("check");
+            middle = -1;
             break;
         }
     }
-    return index;
+    
+    return middle;
 }
 
 function loadList(index) {
@@ -155,7 +176,7 @@ function loadWords(input) {
     var index = -1;
     var count = 0;
     do {
-        index = findItem(input);
+        index = quickFindItem(input);
         if (index < 0) {
             if (input.length > 0)
                 input = S(input).left(input.length - 1);
@@ -173,33 +194,55 @@ function loadWords(input) {
     loadList(index);
 }
 
-function loadData(url) {
-    $.getJSON(url, function(json) {
+function loadData(input, url) {
+    dataID++;
+    var tempID = dataID;
+    var search = input;
+
+    $.getJSON(url)
+    .done(function(json) {
+        if (tempID < dataID) {
+            return;
+        }
+        
         data = json;
         dataURL = url;
         
-        var input = $("#word-search").val();
-        
-        loadWords(input);
+        if (search) {
+            clearWords();
+            loadWords(search);
+        }
+    })
+    .fail(function(jqxhr, textStatus, error) {
+        console.log("get error");
+    })
+    .always(function() {
+        console.log("finished");
     });
 }
 
-function checkLoadData(url) {
+function checkLoadData(input, url) {
     if (dataURL != url) {
-        loadData(url);
+        loadData(input, url);
         return false;
     }
     
     return true;
 }
 
+function inputChange() {
+    var input = $("#word-search").val();
+    var letterURL = getLetterURL(input);
+
+    checkLoadData("", letterURL);
+}
+
 function inputChanged() {
     var input = $("#word-search").val();
     var letterURL = getLetterURL(input);
-    
-    clearWords();
 
-    if (checkLoadData(letterURL)) {
+    if (checkLoadData(input, letterURL)) {
+        clearWords();
         loadWords(input);
     }
 }

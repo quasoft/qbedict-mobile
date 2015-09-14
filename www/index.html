@@ -27,7 +27,7 @@
 <body>
     <div class="view" id="mainview">
         <header>
-            <input id="word-search" class="wide-control" placeholder="Въведете дума / Enter word" type="text" data-clear-btn="true">
+            <input id="word-search" class="wide-control" placeholder="Въведете дума / Enter word" type="text">
         </header>
 
         <div class="pages" id="pages">
@@ -50,6 +50,8 @@
         $("#word-search").bind("input propertychange", function (evt) {
             if (window.event && event.type == "propertychange" && event.propertyName != "value")
                 return;
+            
+            inputChange();
 
             window.clearTimeout($(this).data("timeout"));
             $(this).data("timeout", setTimeout(function () {
