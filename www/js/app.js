@@ -30,8 +30,17 @@ function escapeHtml(unsafe) {
         .replace(/'/g, "&#039;");
 }
 
-function sanitizeWord(str) {
-    return str.replace(/[^a-zA-Zа-яА-Я]/gi, '');
+function sanitizeAndLower(str) {
+    var res = str.replace(/[^a-zA-Zа-яА-Я]/gi, '');
+    return S(res).toLowerCase();
+}
+
+var cyrToLat = {"Ё":"YO","Й":"I","Ц":"TS","У":"U","К":"K","Е":"E","Н":"N","Г":"G","Ш":"SH","Щ":"SCH","З":"Z","Х":"H","Ъ":"'","ё":"yo","й":"i","ц":"ts","у":"u","к":"k","е":"e","н":"n","г":"g","ш":"sh","щ":"sch","з":"z","х":"h","ъ":"'","Ф":"F","Ы":"I","В":"V","А":"a","П":"P","Р":"R","О":"O","Л":"L","Д":"D","Ж":"ZH","Э":"E","ф":"f","ы":"i","в":"v","а":"a","п":"p","р":"r","о":"o","л":"l","д":"d","ж":"zh","э":"e","Я":"Ya","Ч":"CH","С":"S","М":"M","И":"I","Т":"T","Ь":"'","Б":"B","Ю":"YU","я":"ya","ч":"ch","с":"s","м":"m","и":"i","т":"t","ь":"'","б":"b","ю":"yu"};
+
+function transliterate(word){
+    return word.split('').map(function (char) { 
+        return cyrToLat[char] || char; 
+    }).join("");
 }
 
 function highlightMeaning(str, dict) {
@@ -89,14 +98,14 @@ function getLetterURL(input) {
 }
 
 function quickFindItem(input) {
-    input = S(input).stripPunctuation().toLowerCase();
+    input = sanitizeAndLower(input);
     var low = 0;
     var high = data.length - 1;
     var middle = -1;
     var c = 0;    
     while ((low + 1 < high) && (low < data.length) && (high >= 0)) {
         middle = Math.floor(((high - low) / 2) + low);
-        var compare = S(data[middle].w).stripPunctuation().toLowerCase();
+        var compare = sanitizeAndLower(data[middle].w);
         var res = input.localeCompare(compare);
         if (res > 0) {
             low = middle;
@@ -130,7 +139,7 @@ function loadList(index) {
     }
     
     var num = 0;
-    for (var i = index; i < index + MAX_ITEMS; i++)
+    for (var i = index; i < Math.min(index + MAX_ITEMS, data.length); i++)
     {
         num++;
         
@@ -144,7 +153,7 @@ function loadList(index) {
         var meaning = escapeHtml(data[i].m);
         var body = highlightMeaning(meaning, dict);
         body = S(body).replaceAll("\r\n", "<br>");
-        var wordID = sanitizeWord(word) + "-" + num + "-" + Math.floor(Math.random() * 65534) + 1;
+        var wordID = transliterate(sanitizeAndLower(word)) + "-" + num + "-" + Math.floor(Math.random() * 65534) + 1;
         
         $list.append('<li><a href="#' + wordID + '"><span class="definition">' + escapeHtml(word) + '</span><br><span class="first-meaning">' + escapeHtml(firstLine) + '</span></a></li>');
         
