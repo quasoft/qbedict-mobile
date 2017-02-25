@@ -1,17 +1,25 @@
 {
   "project": {
-    "projectSettingsVersion": "1.2",
+    "projectSettingsVersion": "3.0.0",
     "creationData": {
       "projectTypeName": "com.intel.xdk.projecttype.webapp",
       "src": "https://appcenter.html5tools-software.intel.com/api/v2.0/redirect/projectrenderers/release-2015-ww32/webapp/templates-list-view/sample.zip",
       "projectGuid": "7cc6f003-6aa8-445e-ad62-5d5134a96110",
-      "lastModifiedDate": 1442144595116,
+      "lastModifiedDate": 1488024945896,
       "creationDate": 1442042933354
     },
     "sourceDirectory": "www",
     "cordovaPluginsDirectory": "plugins",
     "startFile": "index.html",
-    "projectFiles": {},
+    "projectFiles": {
+      "xdk-publish-meta-data.json": {
+        "settings": {
+          "project": {
+            "XDK-not-deployed": "True"
+          }
+        }
+      }
+    },
     "projectDirectories": {},
     "libraries": [],
     "cordovaPlugins": [],
@@ -19,21 +27,26 @@
     "buildConfigurations": {
       "Android": {
         "platform_": "android",
-        "runtime_": "W3C on Cordova",
+        "runtime_": "W3C on Crosswalk",
         "name_": "Android",
         "preferences_": {
           "android-minSdkVersion": "14",
           "android-targetSdkVersion": "19",
-          "android-installLocation": "auto"
+          "android-installLocation": "auto",
+          "android-signed": false
         },
         "isActive_": true,
+        "certificateId_": "",
         "appName_": "QBE Dictionary",
         "appID_": "quasoft.qbedict.mobile",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [
           {
             "relPath": "icons/Icon-ldpi.png",
@@ -64,64 +77,9 @@
         "addlPermissions_": "",
         "excludedLibraries_": "",
         "iosProvs_": [],
-        "cordovaCLIVersion_": "4.1.2",
+        "cordovaCLIVersion_": "5.1.1",
         "appVersion_": "1.0.1",
         "appVersionCode_": "2",
-        "crosswalkVersion_": "11",
-        "appAuthor_": "QuaSoft",
-        "appDescription_": "Bulgarian English Dictionary"
-      },
-      "Android-Crosswalk": {
-        "platform_": "android",
-        "runtime_": "W3C on Crosswalk",
-        "name_": "Android-Crosswalk",
-        "preferences_": {
-          "android-minSdkVersion": "14",
-          "android-targetSdkVersion": "19",
-          "android-installLocation": "auto"
-        },
-        "isActive_": true,
-        "appName_": "QBE Dictionary",
-        "appID_": "quasoft.qbedict.mobile",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
-        "icons_": [
-          {
-            "relPath": "icons/Icon-ldpi.png",
-            "density": "ldpi",
-            "height": 36,
-            "width": 36
-          },
-          {
-            "relPath": "icons/Icon-mdpi.png",
-            "density": "mdpi",
-            "height": 48,
-            "width": 48
-          },
-          {
-            "relPath": "icons/Icon-hdpi.png",
-            "density": "hdpi",
-            "height": 72,
-            "width": 72
-          },
-          {
-            "relPath": "icons/Icon-xhdpi.png",
-            "density": "xhdpi",
-            "height": 96,
-            "width": 96
-          }
-        ],
-        "splashes_": [],
-        "addlPermissions_": "",
-        "excludedLibraries_": "",
-        "iosProvs_": [],
-        "cordovaCLIVersion_": "4.1.2",
-        "appVersion_": "1.0.1",
-        "appVersionCode_": "2",
-        "crosswalkVersion_": "11",
         "appAuthor_": "QuaSoft",
         "appDescription_": "Bulgarian English Dictionary"
       },
@@ -130,17 +88,22 @@
         "runtime_": "W3C on Cordova",
         "name_": "iOS",
         "preferences_": {
-          "ios-target": "6",
-          "ios-configuration": "adhoc"
+          "ios-configuration": "adhoc",
+          "deployment-target": "6"
         },
         "isActive_": true,
+        "certificateId_": "",
         "appName_": "QBE Dictionary",
         "appID_": "quasoft.qbedict.mobile",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "whitelist",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": [],
+          "properties": {}
+        },
         "icons_": [
           {
             "relPath": "icons/Icon-120.png",
@@ -172,7 +135,7 @@
         "addlPermissions_": "",
         "excludedLibraries_": "",
         "iosProvs_": [],
-        "cordovaCLIVersion_": "4.1.2",
+        "cordovaCLIVersion_": "5.1.1",
         "appVersion_": "1.0.1",
         "appAuthor_": "QuaSoft",
         "appDescription_": "Bulgarian English Dictionary"
@@ -181,21 +144,131 @@
         "platform_": "windows8",
         "runtime_": "W3C on Cordova",
         "name_": "Windows8",
-        "preferences_": {},
+        "preferences_": {
+          "windows-publisher-id": "000000000000",
+          "wp81-publisher-id": "none",
+          "windows-publisher-display-name": "QuaSoft"
+        },
         "isActive_": true,
+        "certificateId_": "",
         "appName_": "QBE Dictionary",
         "appID_": "quasoft.qbedict.mobile",
-        "appAccess_": [
+        "appAccess_": {
+          "mode": "whitelist",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": [],
+          "properties": {}
+        },
+        "icons_": [
           {
-            "origin": "*"
+            "relPath": "package-assets/windows/24.png",
+            "width": 24,
+            "height": 24
+          },
+          {
+            "relPath": "package-assets/windows/30.png",
+            "width": 30,
+            "height": 30
+          },
+          {
+            "relPath": "package-assets/windows/33.png",
+            "width": 33,
+            "height": 33
+          },
+          {
+            "relPath": "package-assets/windows/50.png",
+            "width": 50,
+            "height": 50
+          },
+          {
+            "relPath": "package-assets/windows/58.png",
+            "width": 58,
+            "height": 58
+          },
+          {
+            "relPath": "package-assets/windows/70.png",
+            "width": 70,
+            "height": 70
+          },
+          {
+            "relPath": "package-assets/windows/120.png",
+            "width": 120,
+            "height": 120
+          },
+          {
+            "relPath": "package-assets/windows/44.png",
+            "width": 44,
+            "height": 44
+          },
+          {
+            "relPath": "package-assets/windows/62.png",
+            "width": 62,
+            "height": 62
+          },
+          {
+            "relPath": "package-assets/windows/71.png",
+            "width": 71,
+            "height": 71
+          },
+          {
+            "relPath": "package-assets/windows/99.png",
+            "width": 99,
+            "height": 99
+          },
+          {
+            "relPath": "package-assets/windows/106.png",
+            "width": 106,
+            "height": 106
+          },
+          {
+            "relPath": "package-assets/windows/150.png",
+            "width": 150,
+            "height": 150
+          },
+          {
+            "relPath": "package-assets/windows/170.png",
+            "width": 170,
+            "height": 170
+          },
+          {
+            "relPath": "package-assets/windows/210.png",
+            "width": 210,
+            "height": 210
+          },
+          {
+            "relPath": "package-assets/windows/360.png",
+            "width": 360,
+            "height": 360
+          },
+          {
+            "relPath": "package-assets/windows/310x150.png",
+            "width": 310,
+            "height": 150
+          },
+          {
+            "relPath": "package-assets/windows/434x210.png",
+            "width": 434,
+            "height": 210
+          },
+          {
+            "relPath": "package-assets/windows/744x360.png",
+            "width": 744,
+            "height": 360
+          },
+          {
+            "relPath": "package-assets/windows/310.png",
+            "width": 310,
+            "height": 310
           }
         ],
-        "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
         "iosProvs_": [],
-        "cordovaCLIVersion_": "4.1.2",
+        "cordovaCLIVersion_": "5.1.1",
         "appVersion_": "1.0.1",
         "appAuthor_": "QuaSoft",
         "appDescription_": "Bulgarian English Dictionary"
@@ -206,13 +279,17 @@
         "name_": "WebApp",
         "preferences_": {},
         "isActive_": true,
+        "certificateId_": "",
         "appName_": "qbedict-mobile",
         "appID_": "not.yet.specified",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
@@ -226,13 +303,17 @@
         "name_": "Firefox",
         "preferences_": {},
         "isActive_": true,
+        "certificateId_": "",
         "appName_": "qbedict-mobile",
         "appID_": "not.yet.specified",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
@@ -246,13 +327,17 @@
         "name_": "Chrome",
         "preferences_": {},
         "isActive_": true,
+        "certificateId_": "",
         "appName_": "qbedict-mobile",
         "appID_": "not.yet.specified",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
@@ -266,23 +351,49 @@
         "name_": "Facebook",
         "preferences_": {},
         "isActive_": true,
+        "certificateId_": "",
         "appName_": "qbedict-mobile",
         "appID_": "not.yet.specified",
-        "appAccess_": [
-          {
-            "origin": "*"
-          }
-        ],
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [
+            "*"
+          ],
+          "intents": [],
+          "navigation": []
+        },
         "icons_": [],
         "splashes_": [],
         "addlPermissions_": "",
         "excludedLibraries_": "",
         "appVersion_": "0.0.1",
         "appAuthor_": "Intel XDK"
+      },
+      "WP81": {
+        "platform_": "wp81",
+        "runtime_": "W3C on Cordova",
+        "name_": "WP81",
+        "preferences_": {},
+        "isActive_": true,
+        "certificateId_": "",
+        "appName_": "qbedict-mobile",
+        "appID_": "not.yet.specified",
+        "appAccess_": {
+          "mode": "legacy",
+          "network": [],
+          "intents": [],
+          "navigation": []
+        },
+        "addlPermissions_": "",
+        "icons_": [],
+        "splashes_": [],
+        "appVersion_": "0.0.0.1",
+        "cordovaCLIVersion_": "5.1.1"
       }
     },
     "gameAssetDirectory": "asset",
     "gameMetadata": {},
-    "projectTags": []
+    "projectTags": [],
+    "testDirectory": "test"
   }
 }
