@@ -13,4 +13,5 @@
 !/*.png
 !/package.json
 !/gulpfile.js
+!/package-assets
 /www/data
